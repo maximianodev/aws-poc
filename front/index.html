@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MaxPoc - Nota fiscal(S3)</title>
+  </head>
+  <body>
+    <h1>Nota fiscal</h1>
+
+    <form>
+      <input
+        type="file"
+        accept="application/pdf"
+        multiple="false"
+        name="invoice"
+        id="invoice"
+      />
+
+      <button type="submit" style="display: block; margin-top: 10px">
+        Enviar
+      </button>
+    </form>
+
+    <script>
+      const form = document.querySelector('form')
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        const formData = new FormData()
+        const inputElement = document.getElementById('invoice')
+
+        if (!inputElement.files.length) {
+          return
+        }
+
+        const [file] = inputElement.files
+
+        formData.append('invoice', file)
+
+        fetch('/upload', {
+          method: 'POST',
+          body: formData,
+        })
+      })
+    </script>
+  </body>
+</html>
