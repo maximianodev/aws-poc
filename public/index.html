@@ -3,18 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MaxPoc - Nota fiscal(S3)</title>
+    <title>POC AWS</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <h1>Nota fiscal</h1>
+    <h1>Amazon S3</h1>
 
     <form>
       <input
         type="file"
         accept="application/pdf"
         multiple="false"
-        name="invoice"
-        id="invoice"
+        name="file"
+        id="file"
       />
 
       <button type="submit" style="display: block; margin-top: 10px">
@@ -29,7 +34,7 @@
         event.preventDefault()
 
         const formData = new FormData()
-        const inputElement = document.getElementById('invoice')
+        const inputElement = document.getElementById('file')
 
         if (!inputElement.files.length) {
           return
@@ -37,9 +42,9 @@
 
         const [file] = inputElement.files
 
-        formData.append('invoice', file)
+        formData.append('file', file)
 
-        fetch('/upload', {
+        fetch('/storage/upload', {
           method: 'POST',
           body: formData,
         })
