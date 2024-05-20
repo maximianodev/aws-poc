@@ -10,6 +10,7 @@ class StorageController {
     }
 
     const s3Service = new S3Service()
+    
     try {
       await s3Service.upload({ file: req.file })
 
